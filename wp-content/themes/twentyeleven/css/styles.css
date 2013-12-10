@@ -1,0 +1,28 @@
+
+/* Pagina meu curriculo */
+/* Status inicial do form */
+.formCandidatoDadosPessoais {}
+.formCandidatoExperienciaProfissional,
+.formCandidatoFormacaoAcademica {display:none}
+
+
+/*---------------------------------------------------------------------------------*/
+/*  OVERLAY */
+/*---------------------------------------------------------------------------------*/
+.overlay {background: url('../images/dot.png') repeat 0 0; position: fixed; top:0px; left : 0px;}
+.loading, .boxMsg {background:#fff; padding:20px 50px; text-align:center; width:200px; position:fixed; top:0px; left:0px;}
+.loading p, .boxMsg p {margin-top:10px;}
+.boxMsg {cursor:pointer;}
+
+
+table {width:100%;}
+table td {border:1px solid;}
+
+/*---------------------------------------------------------------------------------*/
+/*  MODAL jQuery UI */
+/*---------------------------------------------------------------------------------*/
+#dialog-modal label, input { display:block; }
+#dialog-modal input.text { margin-bottom:12px; width:95%; padding: .4em; }
+#dialog-modal fieldset { padding:0; border:0; margin-top:25px; }
+#dialog-modal input {margin-bottom: 12px;width: 95%;padding: .4em;}
+.ui-dialog {z-index: 10000!important;}
