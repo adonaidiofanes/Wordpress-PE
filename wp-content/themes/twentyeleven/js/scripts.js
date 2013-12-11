@@ -166,80 +166,6 @@ $(document).ready(function() {
     });
 
     /*----------------------------------------------------------------------------------*/
-    /* EXPERIENCIA PROFISSIONAL - CONTROLE EDITAR */
-    /*----------------------------------------------------------------------------------*/
-    var $formEditarExperiencia = '<div id="dialog-modal" title="@Titulo">' +
-                                    "<form>" +
-                                        "<fieldset>" +
-                                            "<input type='text' name='IdCandidato' value='@IdCandidato' disabled>" +
-                                            "<input type='text' name='IdExperiencia' value='@IdExperiencia' disabled>" +
-                                        
-                                            "<label for='Nome_Empresa'>Nome da Empresa</label>" +
-                                            "<input type='text' name='Nome_Empresa' id='Nome_Empresa' value='@Empresa'>" +
-
-                                            "<label for='Segmentos'>Segmento da Empresa</label>" +
-                                            "@Segmentos" +
-                                            
-                                            "<label for='Data_Entrada'>Data de Entrada</label>" +
-                                            "<input type='text' name='Data_Entrada' id='Data_Entrada' value='@Data_Entrada'>" +
-                                            
-                                            "<label for='Data_Saida'>Data de Saída</label>" +
-                                            "<input type='text' name='Data_Saida' id='Data_Saida' value='@Data_Saida'>" +
-                                            
-                                            "<label for='Cargo'>Cargo</label>" +
-                                            "<input type='text' name='Cargo' id='Cargo' value='@Cargo'>" +
-                                            
-                                            "<label for='Atividades_Desenvolvidas'>Atividades Desenvolvidas</label>" +
-                                            "<textarea rows='3' cols='20' name='Atividades_Desenvolvidas' id='Atividades_Desenvolvidas'>@Atividades_Desenvolvidas" +
-                                            "</textarea>" +
-                                            
-                                            "<label for='Emprego_Atual'>Emprego Atual</label>" +
-                                            "<select name='Emprego_Atual' id='Emprego_Atual'>"  +
-                                                "<option value='0' @Nao>Não</option>" +
-                                                "<option value='1' @Sim>Sim</option>" +
-                                            "</select>" +
-              
-                                            "<input type='submit' value='Salvar'>" +
-                                        "</fieldset>" +
-                                    "</form>";
-                                "</div>";
-    
-    var ExperienciasEditar = function(d){
-        
-        // Gravar array de retorno da requisicao na variavel obj
-        var $obj = d.sucesso[0];
-        var $Segmentos = d.sucesso[1].Segmentos;
-        var Sim, Nao = '';
-        
-        // Verificar se é o emprego atual
-        if( $obj.Emprego_Atual == 1 ){ Sim = 'selected'; } else { Nao = 'selected'; }
-        
-        // Remover dialog caso exista
-        $( "#dialog-modal" ).remove();
-        
-        // Popular informações do formulario para edição
-        var $tpl = $formEditarExperiencia.replace("@Empresa", $obj.Nome_Empresa );
-            $tpl = $tpl.replace("@Titulo",  $obj.Nome_Empresa );
-            $tpl = $tpl.replace("@Data_Entrada",  $obj.Data_Entrada );
-            $tpl = $tpl.replace("@Data_Saida",  $obj.Data_Saida );
-            $tpl = $tpl.replace("@Cargo",  $obj.Cargo );
-            $tpl = $tpl.replace("@Atividades_Desenvolvidas",  $obj.Atividades_Desenvolvidas );
-            $tpl = $tpl.replace("@IdCandidato",  $obj.IdCandidato );
-            $tpl = $tpl.replace("@IdExperiencia",  $obj.Id );
-            $tpl = $tpl.replace("@Segmentos",  $Segmentos );
-            $tpl = $tpl.replace("@Sim",  Sim );
-            $tpl = $tpl.replace("@Nao",  Nao );
-
-        // Inserir informações no dialog-modal
-        $('body').append($tpl);
-        $( "#dialog-modal" ).dialog({
-          height: 400,
-          width: 400,
-          modal: true
-        });
-    }; // Fim > ExperienciasEditar
-    
-    /*----------------------------------------------------------------------------------*/
     /* EXPERIENCIA PROFISSIONAL - CONTROLE EXCLUIR */
     /*----------------------------------------------------------------------------------*/
     var ExperienciasExcluir = function(d){
@@ -255,7 +181,7 @@ $(document).ready(function() {
     };
     
     /*----------------------------------------------------------------------------------*/
-    /* EXPERIENCIA PROFISSIONAL - CONTROLE ADICIONAR */
+    /* EXPERIENCIA PROFISSIONAL - INSERIR */
     /*----------------------------------------------------------------------------------*/
     $("#AddExperiencia").live('click', function(e){
         e.preventDefault();
@@ -274,6 +200,7 @@ $(document).ready(function() {
         service(data, 'ExperienciaProfissional', 'POST', ExperienciasFormMontarInserir);
         
     });
+    
     // Click do botão salvar no form de inserir experiencia
     $("#btnInserirExperiencia").live('click', function(e){
         e.preventDefault();
@@ -374,6 +301,122 @@ $(document).ready(function() {
                                         "</fieldset>" +
                                     "</form>";
                                 "</div>";
+                                
+    /*----------------------------------------------------------------------------------*/
+    /* EXPERIENCIA PROFISSIONAL - ATUALIZAR */
+    /*----------------------------------------------------------------------------------*/
+    // Click do botão salvar no form de ATUALIZAR experiencia
+    $("#btnAtualizarExperiencia").live('click', function(e){
+        e.preventDefault();
+        
+        var data = $("#formAtualizarExperiencia").serializeArray();
+            data.push({ name : "IdCandidato", value : $("#Id").val() });
+            data.push({ name : "IdExperiencia", value : $("#IdExperiencia").val() });
+            data.push({ name : "Acao", value : 'AtualizarExperiencia' });
+            data.push({ name : "DirTemplate", value : $("#DirTemplate").val() });
+        
+        service(data, 'ExperienciaProfissional', 'POST', ExperienciaInserir);
+    });
+    var ExperienciaInserir = function(d){
+        if(d.sucesso){
+            overlayMensagem(d.sucesso);
+            
+            var $obj = d.informacoes;
+            
+         // Adicionar a experiencia na tabela de experiencias
+            var $tpl = $tplExperiencia.replace('@Empresa', $obj.Nome_Empresa);
+                $tpl = $tpl.replace(/@Id/g, $obj.Id);    
+                $tpl = $tpl.replace('@Cargo', $obj.Cargo);
+                $tpl = $tpl.replace('@Data_Entrada', $obj.Data_Entrada);
+                $tpl = $tpl.replace('@Data_Saida', $obj.Data_Entrada);
+            
+            // Adicionar TR da nova experiencia que foi adicionada
+            //$('#Experiencias').find("tbody").prepend($tpl);
+            var $linhaReplace = $("#Experiencias").find("tr.linha"+$obj.Id);
+                $linhaReplace.fadeOut(500, function() { $(this).replaceWith($tpl); });
+            
+            // Remover modal
+            $( "#dialog-modal" ).remove();
+
+        } else {
+            // Exibir mensagem de erro no overlay
+            alert(d.erro);
+        }
+    };
+    
+    /*----------------------------------------------------------------------------------*/
+    /* EXPERIENCIA PROFISSIONAL - CONTROLE ATUALIZAR */
+    /*----------------------------------------------------------------------------------*/
+    var $formEditarExperiencia = '<div id="dialog-modal" title="@Titulo">' +
+                                    "<form id='formAtualizarExperiencia'>" +
+                                        "<fieldset>" +
+                                            "<input type='text' name='IdCandidato' value='@IdCandidato' disabled>" +
+                                            "<input type='text' id='IdExperiencia' name='IdExperiencia' value='@IdExperiencia' disabled>" +
+                                        
+                                            "<label for='Nome_Empresa'>Nome da Empresa</label>" +
+                                            "<input type='text' name='Nome_Empresa' id='Nome_Empresa' value='@Empresa'>" +
+
+                                            "<label for='Segmentos'>Segmento da Empresa</label>" +
+                                            "@Segmentos" +
+                                            
+                                            "<label for='Data_Entrada'>Data de Entrada</label>" +
+                                            "<input type='text' name='Data_Entrada' id='Data_Entrada' value='@Data_Entrada'>" +
+                                            
+                                            "<label for='Data_Saida'>Data de Saída</label>" +
+                                            "<input type='text' name='Data_Saida' id='Data_Saida' value='@Data_Saida'>" +
+                                            
+                                            "<label for='Cargo'>Cargo</label>" +
+                                            "<input type='text' name='Cargo' id='Cargo' value='@Cargo'>" +
+                                            
+                                            "<label for='Atividades_Desenvolvidas'>Atividades Desenvolvidas</label>" +
+                                            "<textarea rows='3' cols='20' name='Atividades_Desenvolvidas' id='Atividades_Desenvolvidas'>@Atividades_Desenvolvidas" +
+                                            "</textarea>" +
+                                            
+                                            "<label for='Emprego_Atual'>Emprego Atual</label>" +
+                                            "<select name='Emprego_Atual' id='Emprego_Atual'>"  +
+                                                "<option value='0' @Nao>Não</option>" +
+                                                "<option value='1' @Sim>Sim</option>" +
+                                            "</select>" +
+              
+                                            "<input id='btnAtualizarExperiencia' type='submit' value='Salvar'>" +
+                                        "</fieldset>" +
+                                    "</form>";
+                                "</div>";
+    
+    var ExperienciasEditar = function(d){
+        
+        // Gravar array de retorno da requisicao na variavel obj
+        var $obj = d.sucesso[0];
+        var $Segmentos = d.sucesso[1].Segmentos;
+        var Sim, Nao = '';
+        
+        // Verificar se é o emprego atual
+        if( $obj.Emprego_Atual == 1 ){ Sim = 'selected'; } else { Nao = 'selected'; }
+        
+        // Remover dialog caso exista
+        $( "#dialog-modal" ).remove();
+        
+        // Popular informações do formulario para edição
+        var $tpl = $formEditarExperiencia.replace("@Empresa", $obj.Nome_Empresa );
+            $tpl = $tpl.replace("@Titulo",  $obj.Nome_Empresa );
+            $tpl = $tpl.replace("@Data_Entrada",  $obj.Data_Entrada );
+            $tpl = $tpl.replace("@Data_Saida",  $obj.Data_Saida );
+            $tpl = $tpl.replace("@Cargo",  $obj.Cargo );
+            $tpl = $tpl.replace("@Atividades_Desenvolvidas",  $obj.Atividades_Desenvolvidas );
+            $tpl = $tpl.replace("@IdCandidato",  $obj.IdCandidato );
+            $tpl = $tpl.replace("@IdExperiencia",  $obj.Id );
+            $tpl = $tpl.replace("@Segmentos",  $Segmentos );
+            $tpl = $tpl.replace("@Sim",  Sim );
+            $tpl = $tpl.replace("@Nao",  Nao );
+
+        // Inserir informações no dialog-modal
+        $('body').append($tpl);
+        $( "#dialog-modal" ).dialog({
+          height: 400,
+          width: 400,
+          modal: true
+        });
+    }; // Fim > ExperienciasEditar
     
 });
 

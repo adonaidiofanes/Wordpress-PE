@@ -60,6 +60,13 @@ if(isset($_POST)){
         $retorno = new ExperienciaProfissionalDAO();
         echo json_encode($retorno->inserirExperiencia($_POST));
     }
+    
+    // Atualizar experiência
+    if( isset($_POST['Acao']) && ($_POST['Acao'] == 'AtualizarExperiencia') ){
+        $retorno = new ExperienciaProfissionalDAO();
+        echo json_encode($retorno->atualizarExperiencia($_POST));
+        //echo json_encode(array('sucesso' => 'estou no controller'));
+    }
 }
 
 ?>
