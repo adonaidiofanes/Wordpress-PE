@@ -55,8 +55,10 @@ if(isset($_POST)){
         return;
     }
     
+    // Adicionar nova experiência
     if( isset($_POST['Acao']) && ($_POST['Acao'] == 'InserirExperiencia') ){
-        echo json_encode(array('sucesso' => 'Vim no controller, falta acionar a DAO para inserir essa nova experiencia.'));
+        $retorno = new ExperienciaProfissionalDAO();
+        echo json_encode($retorno->inserirExperiencia($_POST));
     }
 }
 

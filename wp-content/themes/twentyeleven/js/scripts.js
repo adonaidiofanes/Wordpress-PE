@@ -193,9 +193,11 @@ $(document).ready(function() {
                                             "<textarea rows='3' cols='20' name='Atividades_Desenvolvidas' id='Atividades_Desenvolvidas'>@Atividades_Desenvolvidas" +
                                             "</textarea>" +
                                             
-                                            "<label>Emprego Atual</label>" +
-                                            "<label for='Sim'><input type='radio' id='Sim' name='Emprego_Atual' id='' @Sim>Sim</label>" +
-                                            "<label for='Nao'><input type='radio' id='Nao' name='Emprego_Atual' id='' @Nao>Não</label>" +
+                                            "<label for='Emprego_Atual'>Emprego Atual</label>" +
+                                            "<select name='Emprego_Atual' id='Emprego_Atual'>"  +
+                                                "<option value='0' @Nao>Não</option>" +
+                                                "<option value='1' @Sim>Sim</option>" +
+                                            "</select>" +
               
                                             "<input type='submit' value='Salvar'>" +
                                         "</fieldset>" +
@@ -210,7 +212,7 @@ $(document).ready(function() {
         var Sim, Nao = '';
         
         // Verificar se é o emprego atual
-        if( $obj.Emprego_Atual == 1 ){ Sim = 'checked'; } else { Nao = 'checked'; }
+        if( $obj.Emprego_Atual == 1 ){ Sim = 'selected'; } else { Nao = 'selected'; }
         
         // Remover dialog caso exista
         $( "#dialog-modal" ).remove();
@@ -272,22 +274,51 @@ $(document).ready(function() {
         service(data, 'ExperienciaProfissional', 'POST', ExperienciasFormMontarInserir);
         
     });
+    // Click do botão salvar no form de inserir experiencia
     $("#btnInserirExperiencia").live('click', function(e){
         e.preventDefault();
         
         var data = $("#formAddExperiencia").serializeArray();
             data.push({ name : "IdCandidato", value : $("#Id").val() });
             data.push({ name : "Acao", value : 'InserirExperiencia' });
+            data.push({ name : "DirTemplate", value : $("#DirTemplate").val() });
         
-        // TODO : Fazer ir na $DAO e salvar, retornar mensagem para usuario (sucesso ou erro).
         service(data, 'ExperienciaProfissional', 'POST', ExperienciaInserir);
-        // ':IdCandidato, :Nome_Empresa, :IdSegmento, :Data_Entrada, :Data_Saida, :Cargo, :Atividades_Desenvolvidas, :Emprego_Atual, NOW(), NOW())';
     });
+
+    var $tplExperiencia = "<tr class='linha@Id '>" +
+                            "<td>@Empresa</td>" +
+                            "<td>@Cargo</td>" +
+                            "<td>@Data_Entrada</td>" +
+                            "<td>@Data_Saida</td>" +
+                            "<td><a class='Editar' id='@Id' title='Editar' href='#'>Editar</a></td>" +
+                            "<td><a class='Excluir' id='@Id' title='Excluir' href='#'>Excluir</a></td>" +
+                        "</tr>";
     
     var ExperienciaInserir = function(d){
-        console.log('Voltei do inserir');
-        console.log(d);
-    }
+        if(d.sucesso){
+            overlayMensagem(d.sucesso[0]);
+            
+            var $obj = d.UltimaExperiencia[0];
+            
+            // Adicionar a experiencia na tabela de experiencias
+            var $tpl = $tplExperiencia.replace('@Empresa', $obj.Nome_Empresa);
+                $tpl = $tpl.replace('@Id', $obj.Id);
+                $tpl = $tpl.replace('@Cargo', $obj.Cargo);
+                $tpl = $tpl.replace('@Data_Entrada', $obj.Data_Entrada);
+                $tpl = $tpl.replace('@Data_Saida', $obj.Data_Entrada);
+            
+            // Adicionar TR da nova experiencia que foi adicionada
+            $('#Experiencias').find("tbody").prepend($tpl);
+            
+            // Remover modal
+            $( "#dialog-modal" ).remove();
+
+        } else {
+            // Exibir mensagem de erro no overlay
+            alert('Erro');
+        }
+    };
     
     // TPL > Form de inserção de experiencia
     var ExperienciasFormMontarInserir = function(d){
@@ -333,9 +364,11 @@ $(document).ready(function() {
                                             "<textarea rows='3' cols='20' name='Atividades_Desenvolvidas' id='Atividades_Desenvolvidas'>" +
                                             "</textarea>" +
                                             
-                                            "<label>Emprego Atual</label>" +
-                                            "<label for='Sim'><input type='radio' id='Sim' name='Emprego_Atual' id=''>Sim</label>" +
-                                            "<label for='Nao'><input type='radio' id='Nao' name='Emprego_Atual' id=''>Não</label>" +
+                                            "<label for='Emprego_Atual'>Emprego Atual</label>" +
+                                            "<select name='Emprego_Atual' id='Emprego_Atual'>"  +
+                                                "<option value='0'>Não</option>" +
+                                                "<option value='1'>Sim</option>" +
+                                            "</select>" +
               
                                             "<input id='btnInserirExperiencia' type='submit' value='Salvar'>" +
                                         "</fieldset>" +
