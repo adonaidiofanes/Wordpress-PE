@@ -325,18 +325,6 @@ class ExperienciaProfissional {
             $Atividades_Desenvolvidas,
             $Emprego_Atual;
     
-    
-//    function __construct($Id, $IdCandidato, $IdSegmento, $Data_Entrada, $Data_Saida, $Ultimo_Cargo, $Atividades_Desenvolvidas, $Emprego_Atual) {
-//        $this->setId($Id);
-//        $this->setIdCandidato($IdCandidato);
-//        $this->setAtividades_Desenvolvidas($Atividades_Desenvolvidas);
-//        $this->setData_Entrada($Data_Entrada);
-//        $this->setData_Saida($Data_Saida);
-//        $this->setEmprego_Atual($Emprego_Atual);
-//        $this->setUltimo_Cargo($Ultimo_Cargo);
-//        $this->setEmprego_Atual($Emprego_Atual);
-//    }
-    
     public function mostrarExperiencias($Exp){
         
         $template = "<tr class='linha@Id '>" .
@@ -364,7 +352,7 @@ class ExperienciaProfissional {
         }
         return $retorno;
     }
-    // ---123
+
     public function listaSegmentosCandidato($segmentoSelecionado){
         $DAO = new ExperienciaProfissionalDAO;
         $arr = $DAO->selectAllSegmentos();
@@ -458,9 +446,92 @@ class ExperienciaProfissional {
     public function setIdSegmento($IdSegmento) {
         $this->IdSegmento = $IdSegmento;
     }
+
+}
+
+class FormacaoAcademica {
+
+    private $Id,
+            $IdCandidato,
+            $IdTipoCurso,
+            $Nome_Instituicao,
+            $Nome_Curso,
+            $Situacao,
+            $Data_Conclusao,
+            $Data_Insercao,
+            $Data_Atualizacao;
     
+    public function getId() {
+        return $this->Id;
+    }
+
+    public function setId($Id) {
+        $this->Id = $Id;
+    }
+
+    public function getIdCandidato() {
+        return $this->IdCandidato;
+    }
+
+    public function setIdCandidato($IdCandidato) {
+        $this->IdCandidato = $IdCandidato;
+    }
+
+    public function getIdTipoCurso() {
+        return $this->IdTipoCurso;
+    }
+
+    public function setIdTipoCurso($IdTipoCurso) {
+        $this->IdTipoCurso = $IdTipoCurso;
+    }
+
+    public function getNome_Instituicao() {
+        return $this->Nome_Instituicao;
+    }
+
+    public function setNome_Instituicao($Nome_Instituicao) {
+        $this->Nome_Instituicao = $Nome_Instituicao;
+    }
+
+    public function getNome_Curso() {
+        return $this->Nome_Curso;
+    }
+
+    public function setNome_Curso($Nome_Curso) {
+        $this->Nome_Curso = $Nome_Curso;
+    }
+
+    public function getSituacao() {
+        return $this->Situacao;
+    }
+
+    public function setSituacao($Situacao) {
+        $this->Situacao = $Situacao;
+    }
+
+    public function getData_Conclusao() {
+        return $this->Data_Conclusao;
+    }
+
+    public function setData_Conclusao($Data_Conclusao) {
+        $this->Data_Conclusao = $Data_Conclusao;
+    }
     
-    
+    public function getData_Insercao() {
+        return $this->Data_Insercao;
+    }
+
+    public function setData_Insercao($Data_Insercao) {
+        $this->Data_Insercao = $Data_Insercao;
+    }
+
+    public function getData_Atualizacao() {
+        return $this->Data_Atualizacao;
+    }
+
+    public function setData_Atualizacao($Data_Atualizacao) {
+        $this->Data_Atualizacao = $Data_Atualizacao;
+    }
 
 }
 

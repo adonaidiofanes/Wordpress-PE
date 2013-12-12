@@ -230,7 +230,7 @@ $(document).ready(function() {
             
             // Adicionar a experiencia na tabela de experiencias
             var $tpl = $tplExperiencia.replace('@Empresa', $obj.Nome_Empresa);
-                $tpl = $tpl.replace('@Id', $obj.Id);
+                $tpl = $tpl.replace(/@Id/g, $obj.Id);  
                 $tpl = $tpl.replace('@Cargo', $obj.Cargo);
                 $tpl = $tpl.replace('@Data_Entrada', $obj.Data_Entrada);
                 $tpl = $tpl.replace('@Data_Saida', $obj.Data_Entrada);
@@ -278,6 +278,12 @@ $(document).ready(function() {
                                             "<label for='Segmentos'>Segmento da Empresa</label>" +
                                             "@Segmentos" +
                                             
+                                            "<label for='Emprego_Atual'>Emprego Atual</label>" +
+                                            "<select name='Emprego_Atual' id='Emprego_Atual'>"  +
+                                                "<option value='0'>Não</option>" +
+                                                "<option value='1'>Sim</option>" +
+                                            "</select>" +
+                                            
                                             "<label for='Data_Entrada'>Data de Entrada</label>" +
                                             "<input type='text' name='Data_Entrada' id='Data_Entrada' value=''>" +
                                             
@@ -291,12 +297,6 @@ $(document).ready(function() {
                                             "<textarea rows='3' cols='20' name='Atividades_Desenvolvidas' id='Atividades_Desenvolvidas'>" +
                                             "</textarea>" +
                                             
-                                            "<label for='Emprego_Atual'>Emprego Atual</label>" +
-                                            "<select name='Emprego_Atual' id='Emprego_Atual'>"  +
-                                                "<option value='0'>Não</option>" +
-                                                "<option value='1'>Sim</option>" +
-                                            "</select>" +
-              
                                             "<input id='btnInserirExperiencia' type='submit' value='Salvar'>" +
                                         "</fieldset>" +
                                     "</form>";
@@ -315,9 +315,9 @@ $(document).ready(function() {
             data.push({ name : "Acao", value : 'AtualizarExperiencia' });
             data.push({ name : "DirTemplate", value : $("#DirTemplate").val() });
         
-        service(data, 'ExperienciaProfissional', 'POST', ExperienciaInserir);
+        service(data, 'ExperienciaProfissional', 'POST', ExperienciaAtualizar);
     });
-    var ExperienciaInserir = function(d){
+    var ExperienciaAtualizar = function(d){
         if(d.sucesso){
             overlayMensagem(d.sucesso);
             
@@ -359,6 +359,12 @@ $(document).ready(function() {
                                             "<label for='Segmentos'>Segmento da Empresa</label>" +
                                             "@Segmentos" +
                                             
+                                            "<label for='Emprego_Atual'>Emprego Atual</label>" +
+                                            "<select name='Emprego_Atual' id='Emprego_Atual'>"  +
+                                                "<option value='0' @Nao>Não</option>" +
+                                                "<option value='1' @Sim>Sim</option>" +
+                                            "</select>" +
+                                            
                                             "<label for='Data_Entrada'>Data de Entrada</label>" +
                                             "<input type='text' name='Data_Entrada' id='Data_Entrada' value='@Data_Entrada'>" +
                                             
@@ -372,12 +378,6 @@ $(document).ready(function() {
                                             "<textarea rows='3' cols='20' name='Atividades_Desenvolvidas' id='Atividades_Desenvolvidas'>@Atividades_Desenvolvidas" +
                                             "</textarea>" +
                                             
-                                            "<label for='Emprego_Atual'>Emprego Atual</label>" +
-                                            "<select name='Emprego_Atual' id='Emprego_Atual'>"  +
-                                                "<option value='0' @Nao>Não</option>" +
-                                                "<option value='1' @Sim>Sim</option>" +
-                                            "</select>" +
-              
                                             "<input id='btnAtualizarExperiencia' type='submit' value='Salvar'>" +
                                         "</fieldset>" +
                                     "</form>";

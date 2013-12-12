@@ -198,95 +198,6 @@
             <p>Cadastrar suas experiencias profissionais!</p>
         <?php } ?>
         
-        <div id="Dialog" class="hide"></div>
-            
-        <!--
-        <form id="Experiencia_Profissional" class="hide">
-         <legend>Experiência Profissional</legend>
-
-         <div class="grid-4-12">
-             <label for="Empresa">Nome da Empresa <em class="formee-req">*</em></label>
-             <input type="text" value="" name="Empresa" id="Empresa">
-         </div>
-
-         <div class="grid-4-12">
-             <label for="Segmento">Segmento <em class="formee-req">*</em></label>
-             <select id="Segmento" name="Segmento">
-                 <option value="-1">Selecione uma opção</option><option value="1">(não classificado)</option><option value="3">Agricultura e Pecuária</option><option value="4">Alimentos</option><option value="5">Arquitetura</option><option value="6">Assistência Médica</option><option value="7">Associações</option><option value="8">Auditoria</option><option value="69">Automotivo</option><option value="9">Autopeças</option><option value="77">Bancos</option><option value="10">Bebidas</option><option value="71">Brindes</option><option value="11">Brinquedos</option><option value="12">Calçados e Couro</option><option value="80">Cama, mesa e banho</option><option value="13">Comércio Atacadista</option><option value="14">Comércio Exterior</option><option value="15">Comércio Varejista</option><option value="17">Construção Civil</option><option value="18">Consultoria</option><option value="19">Contabilidade</option><option value="78">Corretoras</option><option value="73">Distribuidores</option><option value="76">Eletrodomésticos</option><option value="21">Embalagens</option><option value="22">Energia</option><option value="23">Engenharia</option><option value="24">Ensino e Pesquisa</option><option value="25">Entretenimento – Cultura e Lazer</option><option value="26">Esporte</option><option value="27">Farmacêutico</option><option value="28">Ferramentas</option><option value="30">Finanças</option><option value="74">Franquias</option><option value="31">Fumo</option><option value="32">Governo</option><option value="33">Gráfica</option><option value="34">Higiene e Limpeza</option><option value="36">Hoteleiro</option><option value="38">Imobiliário</option><option value="37">Imprensa e Comunicação</option><option value="39">Indústria</option><option value="41">Internet</option><option value="42">Jurídico</option><option value="43">Madeira</option><option value="44">Máquinas e Equipamentos</option><option value="75">Material de construção</option><option value="72">Material de escritório</option><option value="20">Material eletrônico (componentes eletrônicos)</option><option value="45">Mecânica</option><option value="82">Meio Ambiente</option><option value="46">Metalúrgico, Siderúrgico </option><option value="47">Mineração</option><option value="48">Móveis e Decoração</option><option value="49">Não Metálicos</option><option value="50">Papel e Celulose</option><option value="52">Perfumaria e Cosméticos</option><option value="54">Petroquímica</option><option value="51">Plástico e Borracha</option><option value="53">Publicidade</option><option value="55">Química</option><option value="56">Recursos Humanos</option><option value="35">Saúde, Hospitalar e Laboratorial</option><option value="58">Seguradoras e Previdência Privada</option><option value="59">Serviços (outros)</option><option value="79">Serviços Públicos</option><option value="61">Tecnologia e Informática</option><option value="62">Telecomunicações</option><option value="81">Telemarketing / Call Center</option><option value="63">Terceiro setor / ONG</option><option value="64">Têxtil</option><option value="65">Transporte e Logística</option><option value="66">Turismo</option><option value="67">Utilidades Domésticas</option><option value="68">Vestuário</option>
-             </select>
-         </div>
-
-         <div class="grid-4-12">
-             <label for="DataEntrada">Data de Entrada <em class="formee-req">*</em></label>
-             <input type="text" value="" name="DataEntrada" id="DataEntrada">
-         </div>
-
-         <div class="grid-4-12">
-             <label for="DataSaida">Data de Saida <em class="formee-req">*</em></label>
-             <input type="text" value="" name="DataSaida" id="DataSaida">
-         </div>
-
-         <div class="grid-4-12">
-             <label for="Cargo">Cargo <em class="formee-req">*</em></label>
-             <input type="text" value="" name="Cargo" id="UltimoCargo">
-         </div>
-
-         <div class="grid-12-12">
-             <label for="Atividades">Atividades Desenvolvidas <em class="formee-req">*</em></label>
-             <textarea id="Atividades" cols="" rows=""></textarea>
-         </div>
-
-         <div class="grid-12-12">
-             <ul>
-                 <li><a href="#">Adicionar Outra Experiência</a></li>
-                 <li><a href="#">Remover Experiência</a></li>
-             </ul>
-         </div>
-        </form>
-            
-        
-        <legend>Experiência Profissional</legend>
-        
-        <div class="grid-4-12">
-            <label for="Empresa">Nome da Empresa <em class="formee-req">*</em></label>
-            <input type="text" value="" name="Empresa" id="Empresa">
-        </div>
-        
-        <div class="grid-4-12">
-            <label for="Segmento">Segmento <em class="formee-req">*</em></label>
-            <select id="Segmento" name="Segmento">
-                <option value="-1">Selecione uma opção</option><option value="1">(não classificado)</option><option value="3">Agricultura e Pecuária</option><option value="4">Alimentos</option><option value="5">Arquitetura</option><option value="6">Assistência Médica</option><option value="7">Associações</option><option value="8">Auditoria</option><option value="69">Automotivo</option><option value="9">Autopeças</option><option value="77">Bancos</option><option value="10">Bebidas</option><option value="71">Brindes</option><option value="11">Brinquedos</option><option value="12">Calçados e Couro</option><option value="80">Cama, mesa e banho</option><option value="13">Comércio Atacadista</option><option value="14">Comércio Exterior</option><option value="15">Comércio Varejista</option><option value="17">Construção Civil</option><option value="18">Consultoria</option><option value="19">Contabilidade</option><option value="78">Corretoras</option><option value="73">Distribuidores</option><option value="76">Eletrodomésticos</option><option value="21">Embalagens</option><option value="22">Energia</option><option value="23">Engenharia</option><option value="24">Ensino e Pesquisa</option><option value="25">Entretenimento – Cultura e Lazer</option><option value="26">Esporte</option><option value="27">Farmacêutico</option><option value="28">Ferramentas</option><option value="30">Finanças</option><option value="74">Franquias</option><option value="31">Fumo</option><option value="32">Governo</option><option value="33">Gráfica</option><option value="34">Higiene e Limpeza</option><option value="36">Hoteleiro</option><option value="38">Imobiliário</option><option value="37">Imprensa e Comunicação</option><option value="39">Indústria</option><option value="41">Internet</option><option value="42">Jurídico</option><option value="43">Madeira</option><option value="44">Máquinas e Equipamentos</option><option value="75">Material de construção</option><option value="72">Material de escritório</option><option value="20">Material eletrônico (componentes eletrônicos)</option><option value="45">Mecânica</option><option value="82">Meio Ambiente</option><option value="46">Metalúrgico, Siderúrgico </option><option value="47">Mineração</option><option value="48">Móveis e Decoração</option><option value="49">Não Metálicos</option><option value="50">Papel e Celulose</option><option value="52">Perfumaria e Cosméticos</option><option value="54">Petroquímica</option><option value="51">Plástico e Borracha</option><option value="53">Publicidade</option><option value="55">Química</option><option value="56">Recursos Humanos</option><option value="35">Saúde, Hospitalar e Laboratorial</option><option value="58">Seguradoras e Previdência Privada</option><option value="59">Serviços (outros)</option><option value="79">Serviços Públicos</option><option value="61">Tecnologia e Informática</option><option value="62">Telecomunicações</option><option value="81">Telemarketing / Call Center</option><option value="63">Terceiro setor / ONG</option><option value="64">Têxtil</option><option value="65">Transporte e Logística</option><option value="66">Turismo</option><option value="67">Utilidades Domésticas</option><option value="68">Vestuário</option>
-            </select>
-        </div>
-        
-        <div class="grid-4-12">
-            <label for="DataEntrada">Data de Entrada <em class="formee-req">*</em></label>
-            <input type="text" value="" name="DataEntrada" id="DataEntrada">
-        </div>
-        
-        <div class="grid-4-12">
-            <label for="DataSaida">Data de Saida <em class="formee-req">*</em></label>
-            <input type="text" value="" name="DataSaida" id="DataSaida">
-        </div>
-        
-        <div class="grid-4-12">
-            <label for="Cargo">Cargo <em class="formee-req">*</em></label>
-            <input type="text" value="" name="Cargo" id="UltimoCargo">
-        </div>
-        
-        <div class="grid-12-12">
-            <label for="Atividades">Atividades Desenvolvidas <em class="formee-req">*</em></label>
-            <textarea id="Atividades" cols="" rows=""></textarea>
-        </div>
-        
-        <div class="grid-12-12">
-            <ul>
-                <li><a href="#">Adicionar Outra Experiência</a></li>
-                <li><a href="#">Remover Experiência</a></li>
-            </ul>
-        </div> -->
-        
-        
     </fieldset>
     
     <!-- Formacao Academica | formCandidatoFormacaoAcademica -->
@@ -298,7 +209,7 @@
         <div class="grid-6-12">
             <label for="TipoCurso">Tipo do Curso <em class="formee-req">*</em></label>
             <select id="TipoCurso">
-                <option value="-1">Selecione uma opção</option><option value="10">Formação escolar fundamental (1o grau) e média (2o grau)</option><option value="20">Curso técnico – Médio (2o grau)</option><option value="30">Graduação</option><option value="40">Pós-Graduação – Especialização</option><option value="50">Pós-Graduação – MBA</option><option value="60">Pós-Graduação – Mestrado</option><option value="70">Pós-Graduação – Doutorado</option><option value="80">Cursos Complementares</option>
+
             </select>
         </div>        
         
