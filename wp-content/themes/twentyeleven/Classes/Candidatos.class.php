@@ -19,7 +19,8 @@ class Candidato {
             $TelCel,
             $TelRec,
             $Email,
-            $Experiencia_Profissional;
+            $Experiencia_Profissional,
+            $Formacao_Academica;
     
     function __construct($Id) {
         
@@ -27,6 +28,10 @@ class Candidato {
         
         $ExpDAO = new ExperienciaProfissionalDAO();
         $this->setExperiencia_Profissional($ExpDAO->selecionarTodasExperiencias($Id));
+        
+        $Formacao = new FormacaoAcademicaDAO();
+        $this->setFormacao_Academica($Formacao->selectAll($Id));
+        
         
 //        $Exp = (object) array();
 //        
@@ -88,10 +93,6 @@ class Candidato {
                 $this->setTelRec( $arr[0]->Telefone );
                 unset($arr);
             }
-            
-            
-        
-        
     }
     
     /*
@@ -310,6 +311,14 @@ class Candidato {
 
     public function setExperiencia_Profissional($Experiencia_Profissional) {
         $this->Experiencia_Profissional = $Experiencia_Profissional;
+    }
+    
+    public function setFormacao_Academica($Formacao_Academica) {
+        $this->Formacao_Academica = $Formacao_Academica;
+    }
+    
+    public function getFormacao_Academica() {
+        return $this->Formacao_Academica;
     }
 
 }
@@ -531,6 +540,33 @@ class FormacaoAcademica {
 
     public function setData_Atualizacao($Data_Atualizacao) {
         $this->Data_Atualizacao = $Data_Atualizacao;
+    }
+    
+    public function showFormacoes($Formacoes){
+        
+        $template = "<tr class='linha@Id '>" .
+                        "<td>@Instituicao</td>" .
+                        "<td>@Curso</td>" .
+                        "<td>@Situacao</td>" .
+                        "<td>@Data_Conclusao</td>" .
+                        "<td><a class='Editar' id='@Id' title='Editar' href='#'>Editar</a></td>" .
+                        "<td><a class='Excluir' id='@Id' title='Excluir' href='#'>Excluir</a></td>" .
+                    "</tr>";
+        
+        $retorno = "";
+        if( count($Formacoes)>0 ){
+            for( $i=0;$i<count($Formacoes);$i++ ){
+                $Montar = str_replace("@Instituicao", $Formacoes[$i]->Nome_Instituicao, $template);
+                $Montar = str_replace("@Curso", $Formacoes[$i]->Nome_Curso, $Montar);
+                $Montar = str_replace("@Situacao", $Formacoes[$i]->Situacao, $Montar);
+                $Montar = str_replace("@Data_Conclusao", $Formacoes[$i]->Data_Conclusao, $Montar);
+                $Montar = str_replace("@Id", $Formacoes[$i]->Id, $Montar);
+                $retorno = $retorno . $Montar;
+            }
+        } else {
+            $retorno = "Sem formações acadêmicas cadastradas";
+        }
+        return $retorno;
     }
 
 }

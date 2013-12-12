@@ -95,6 +95,16 @@ $(document).ready(function() {
         
     };
     
+    /*----------------------------------------------------------------------------------*/
+    /* CONTROLE DO MENU DE NAVEGAÇÃO */
+    /*----------------------------------------------------------------------------------*/
+    $(".menuNavegacao input").live('click', function(e){
+        e.preventDefault();
+        var objeto = $(this).attr('id');
+        $("#main").find('fieldset').hide();
+        $("."+objeto).show();
+    });
+    
     $(".overlay, .boxMsg").live('click', function(e){ e.preventDefault(); removerOverlay(); });
 
     /*----------------------------------------------------------------------------------*/
@@ -129,16 +139,6 @@ $(document).ready(function() {
         }
     };
 
-    /*----------------------------------------------------------------------------------*/
-    /* CONTROLE DO MENU DE NAVEGAÇÃO */
-    /*----------------------------------------------------------------------------------*/
-    $(".menuNavegacao input").live('click', function(e){
-        e.preventDefault();
-        var objeto = $(this).attr('id');
-        $("#main").find('fieldset').hide();
-        $("."+objeto).show();
-    });
-    
     /*----------------------------------------------------------------------------------*/
     /* CONTROLE EXPERIENCIA PROFISSIONAL */
     /*----------------------------------------------------------------------------------*/

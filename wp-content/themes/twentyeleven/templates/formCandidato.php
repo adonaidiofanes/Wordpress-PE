@@ -25,7 +25,8 @@
     include_once $DirTemplate . 'Classes/CandidatosDAO.class.php';
     
     $Candidato = new Candidato($current_user->ID);
-    $Exp_Prof = new ExperienciaProfissional();
+    $Exp_Prof  = new ExperienciaProfissional();
+    $Formacao  = new FormacaoAcademica();
     
     // Verificando Sexo do Candidato
     $Masculino = ''; $Feminino = '';
@@ -181,8 +182,8 @@
                 <tr class="ui-widget-header">
                     <th>Empresa</th>
                     <th>Cargo</th>
-                    <th>Entrada</th>
-                    <th>Saída</th>
+                    <th>Data de Entrada</th>
+                    <th>Data de Saída</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -195,7 +196,7 @@
         </table>
         </div>
         <?php } else { ?>
-            <p>Cadastrar suas experiencias profissionais!</p>
+            <p>Nenhuma experiência profissional cadastrada!</p>
         <?php } ?>
         
     </fieldset>
@@ -206,7 +207,32 @@
         
         <legend>Formação Acadêmica</legend>
         
-        <div class="grid-6-12">
+        <small><a href="#" id="AddExperiencia">Adicionar nova formação acadêmica</a></small>
+        <?php if($Candidato->getFormacao_Academica()){?>
+        <div class="ui-widget">
+        <table id="Experiencias" class="ui-widget ui-widget-content">
+            <thead>
+                <tr class="ui-widget-header">
+                    <th>Instituição</th>
+                    <th>Curso</th>
+                    <th>Situação</th>
+                    <th>Data_Conclusao</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <?= $Formacao->showFormacoes($Candidato->getFormacao_Academica()); ?>
+            </tbody>
+            
+        </table>
+        </div>
+        <?php } else { ?>
+            <p>Nenhuma formação acadêmica cadastrada!</p>
+        <?php } ?>
+        
+        <!--div class="grid-6-12">
             <label for="TipoCurso">Tipo do Curso <em class="formee-req">*</em></label>
             <select id="TipoCurso">
 
@@ -242,7 +268,7 @@
                 <li><a href="#">Adicionar Outra Formação</a></li>
                 <li><a href="#">Remover Formação</a></li>
             </ul>
-        </div>
+        </div-->
         
     </fieldset>
         
