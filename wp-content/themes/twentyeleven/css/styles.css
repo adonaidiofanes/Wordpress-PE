@@ -26,3 +26,10 @@ table td {border:1px solid;}
 #dialog-modal fieldset { padding:0; border:0; margin-top:25px; }
 #dialog-modal input {margin-bottom: 12px;width: 95%;padding: .4em;}
 .ui-dialog {z-index: 10000!important;}
+
+/*---------------------------------------------------------------------------------*/
+/*  TABELAS */
+/*---------------------------------------------------------------------------------*/
+.tabela {padding: 20px; border: none;}
+.tabela td{font-size: 15px; padding: 3px;}
+.tabela th{font-size: 15px; padding: 3px; font-weight: bold;}

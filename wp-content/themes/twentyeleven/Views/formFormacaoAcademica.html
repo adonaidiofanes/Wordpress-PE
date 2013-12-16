@@ -1,0 +1,32 @@
+<div id="dialog-modal" title="@Titulo">
+    <form id='formAtualizarFormacao'>
+        <fieldset>
+            <input type='text' name='IdCandidato' value='@IdCandidato' disabled>
+
+            <label for='TipoCurso'>Tipo do Curso</label>
+            "@TipoCurso
+
+            <label for='Nome_Instituicao'>Instituição</label>
+            <input type='text' name='Nome_Instituicao' id='Nome_Instituicao' value='Atualizar'>
+
+            <label for='Nome_Curso'>Nome do Curso</label>
+            <input type='text' name='Nome_Curso' id='Nome_Curso' value=''>
+
+            <label>Situação</label> 
+            <label for='SituacaoConcluida'> 
+                    <input type='radio' name='Situacao' value='1' id='SituacaoConcluida'>Concluído
+            </label>
+            <label for='SituacaoCursando'> 
+                    <input type='radio' name='Situacao' value='2' id='SituacaoCursando'>Cursando
+            </label>
+            <label for='SituacaoInterrompido'> 
+                    <input type='radio' name='Situacao' value='3' id='SituacaoInterrompido'>Interrompido
+            </label>
+
+            <label for='Data_Conclusao'>Nome do Curso</label>
+            <input type='text' name='Data_Conclusao' id='Data_Conclusao' value=''>
+
+            <input id='btnInserirFormacao' type='submit' value='Salvar'>
+        </fieldset>
+    </form>
+</div>

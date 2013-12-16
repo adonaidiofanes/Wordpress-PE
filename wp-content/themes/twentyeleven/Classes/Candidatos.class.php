@@ -31,20 +31,6 @@ class Candidato {
         
         $Formacao = new FormacaoAcademicaDAO();
         $this->setFormacao_Academica($Formacao->selectAll($Id));
-        
-        
-//        $Exp = (object) array();
-//        
-//        for( $i=0;$i<count($ExpDAO);$i++ ){
-//            $montarObj = new ExperienciaProfissional($ExpDAO['Id'], $ExpDAO['IdCandidato'], $ExpDAO['IdSegmento'], $ExpDAO['Data_Entrada'], $ExpDAO['Data_Saida'], $ExpDAO['Ultimo_Cargo'], $ExpDAO['Atividades_Desenvolvidas'], $ExpDAO['Emprego_Atual']);
-//            array_push($montarObj, $Exp);
-//        }
-//        
-//        $this->setExperiencia_Profissional($Exp);
-        
-        
-//        $Exp = new ExperienciaProfissional($Id);
-//        $this->setExperiencia_Profissional($Exp);
 
         $DAO = new CandidatosDAO();
         
@@ -546,7 +532,7 @@ class FormacaoAcademica {
         
         $template = "<tr class='linha@Id '>" .
                         "<td>@Instituicao</td>" .
-                        "<td>@Curso</td>" .
+                        "<td>@Tipo @Curso</td>" .
                         "<td>@Situacao</td>" .
                         "<td>@Data_Conclusao</td>" .
                         "<td><a class='Editar' id='@Id' title='Editar' href='#'>Editar</a></td>" .
@@ -556,17 +542,61 @@ class FormacaoAcademica {
         $retorno = "";
         if( count($Formacoes)>0 ){
             for( $i=0;$i<count($Formacoes);$i++ ){
-                $Montar = str_replace("@Instituicao", $Formacoes[$i]->Nome_Instituicao, $template);
-                $Montar = str_replace("@Curso", $Formacoes[$i]->Nome_Curso, $Montar);
-                $Montar = str_replace("@Situacao", $Formacoes[$i]->Situacao, $Montar);
-                $Montar = str_replace("@Data_Conclusao", $Formacoes[$i]->Data_Conclusao, $Montar);
-                $Montar = str_replace("@Id", $Formacoes[$i]->Id, $Montar);
+                $Montar = str_replace("@Instituicao", $this->verificarFormacao($Formacoes[$i]->Nome_Instituicao), $template);
+                $Montar = str_replace("@Curso", $this->verificarFormacao($Formacoes[$i]->Nome_Curso), $Montar);
+                $Montar = str_replace("@Situacao", $this->verificarSituacao($Formacoes[$i]->Situacao), $Montar);
+                $Montar = str_replace("@Data_Conclusao", $this->verificarFormacao($Formacoes[$i]->Data_Conclusao), $Montar);
+                $Montar = str_replace("@Id", $this->verificarFormacao($Formacoes[$i]->Id), $Montar);
+                $Montar = str_replace("@Tipo", $this->verificarFormacao($Formacoes[$i]->GrauFormacao), $Montar);
                 $retorno = $retorno . $Montar;
             }
         } else {
             $retorno = "Sem formações acadêmicas cadastradas";
         }
         return $retorno;
+    }
+    
+    public function verificarFormacao($str){
+        if( !empty($str) ){ return $str; }
+        else { return ""; }
+    }
+    
+    public function verificarSituacao($str){
+        // 1: Concluido, 2: Cursando, 3: Interrompido
+        switch($str){
+            case 1 : return "Concluído"; break;
+            case 2 : return "Cursando"; break;
+            case 3 : return "Interrompido"; break;
+            default : "Não informado";
+        }
+    }
+    
+    /**
+     * SELECIONA TODOS OS TIPOS DE CURSOS DISPONIVEIS NA TABELA FORMACAO_TIPO
+     * RETORNA UM OPTION SELECT HTML COM OS TIPOS DE CURSO
+     *
+     * @param $tipoSelecionado Caso o candidato tenha um curso selecionado
+     */
+    public function getTiposCursos($tipoSelecionado = NULL){
+        $DAO = new FormacaoAcademicaDAO();
+        $arr = $DAO->selectAllTipoCurso();
+        
+        $conteudo = '';
+        $s = ''; // Variavel que seta o selected
+        
+        foreach ($arr as $key => $value) {
+            
+            $Id = $arr[$key]['Id'];
+            $Nome = $arr[$key]['Nome'];
+            
+            if( $tipoSelecionado == $Id ){ $s = ' selected'; } else { $s = ''; }
+            
+            $conteudo = $conteudo . "<option value='$Id'$s>$Nome</option>" . PHP_EOL;
+            
+        }
+        
+        $retorno = '<select id="IdTipoCurso" name="IdTipoCurso">' . $conteudo . '</select>';
+        return $retorno;        
     }
 
 }
