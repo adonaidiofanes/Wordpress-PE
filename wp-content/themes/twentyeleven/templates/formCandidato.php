@@ -177,7 +177,7 @@
         <small><a href="#" id="AddExperiencia">Adicionar nova experiência</a></small>
         <?php if($Candidato->getExperiencia_Profissional()){?>
         <div class="ui-widget">
-        <table id="Experiencias" class="ui-widget ui-widget-content">
+        <table id="Experiencias" class="ui-widget ui-widget-content tabela">
             <thead>
                 <tr class="ui-widget-header">
                     <th>Empresa</th>
@@ -207,16 +207,16 @@
         
         <legend>Formação Acadêmica</legend>
         
-        <small><a href="#" id="AddExperiencia">Adicionar nova formação acadêmica</a></small>
+        <small><a href="#" id="AddFormacao">Adicionar nova formação acadêmica</a></small>
         <?php if($Candidato->getFormacao_Academica()){?>
         <div class="ui-widget">
-        <table id="Experiencias" class="ui-widget ui-widget-content">
+        <table id="FormacaoAcademica" class="ui-widget ui-widget-content tabela">
             <thead>
                 <tr class="ui-widget-header">
                     <th>Instituição</th>
-                    <th>Curso</th>
+                    <th>Grau de Formação / Curso</th>
                     <th>Situação</th>
-                    <th>Data_Conclusao</th>
+                    <th>Data de Conclusão</th>
                     <th></th>
                     <th></th>
                 </tr>
